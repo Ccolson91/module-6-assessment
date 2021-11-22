@@ -13,6 +13,16 @@ var rollbar = new Rollbar({
   captureUnhandledRejections: true
 });
 
+//To fix promise issue. 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
 // record a generic message and send it to Rollbar
 rollbar.log("Hello world!");
 
